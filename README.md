@@ -201,23 +201,3 @@ Delete the application:
 ```bash
 rad app delete -a order-console
 ```
-
-## Infrastructure & Recipes
-
-### Kubernetes
-
-In-cluster infrastructure — no cloud account needed:
-
-| Resource | Backing Service | Recipe |
-|----------|----------------|--------|
-| `statestore` | PostgreSQL 16 (StatefulSet) | `recipes/stateStores/kubernetes/main.tf` |
-| `pubsub` | Apache Kafka (KRaft mode) | `recipes/pubSubBrokers/kubernetes/main.tf` |
-
-### Azure
-
-Managed Azure services for production workloads:
-
-| Resource | Backing Service | Recipe |
-|----------|----------------|--------|
-| `statestore` | Azure Database for PostgreSQL Flexible Server | `recipes/stateStores/azure/main.tf` |
-| `pubsub` | Azure Event Hubs (Kafka-enabled namespace) | `recipes/pubSubBrokers/azure/main.tf` |
