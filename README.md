@@ -1,4 +1,4 @@
-# Order Consp Application with Dapr and Radius
+# Order Management Application with Dapr and Radius
 
 This sample demonstrates a microservices order-processing application that uses [Dapr](https://dapr.io) for state management and pub/sub messaging, leveraging [Radius](https://radapp.io) for deployment across Kubernetes and Azure.
 
