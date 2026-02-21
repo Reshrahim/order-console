@@ -126,15 +126,6 @@ Create a resource group and deploy the Azure environment:
 rad group create azure
 ```
 
-Configure the Azure credential provider:
-
-```bash
-rad credential register azure sp \
-  --client-id <app-id> \
-  --client-secret <password> \
-  --tenant-id <tenant-id>
-```
-
 Deploy the Azure environment, passing your Azure subscription and resource group:
 
 ```bash
