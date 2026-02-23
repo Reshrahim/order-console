@@ -78,7 +78,7 @@ resource orders_api 'Applications.Core/containers@2023-10-01-preview' = {
 
 resource fulfillment_worker 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'fulfillment-worker'
-  
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -117,6 +117,7 @@ resource fulfillment_worker 'Applications.Core/containers@2023-10-01-preview' = 
 
 resource frontend_ui 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend-ui'
+  location: 'global'
   properties: {
     application: app.id
     container: {
