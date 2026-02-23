@@ -89,6 +89,8 @@ rad group create local
 rad deploy radius/environments/kubernetes.bicep --group local
 ```
 
+>[!NOTE] If you hit an error "No environment name or ID provided, pass in an environment name or ID" create an environment first with `rad environment create azure --group azure` and then run the deploy command again. This is a temporary workaround and should be fixed in v0.55.0 release.
+
 This creates a `local` environment and registers the Kubernetes recipes.
 
 Create a workspace:
