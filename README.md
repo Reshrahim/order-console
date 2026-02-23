@@ -238,6 +238,17 @@ kubectl port-forward svc/frontend-ui 3000:3000 -n <namespace>
 
 Open **http://localhost:3000** in your browser.
 
+### 7. Access the Radius dashboard
+
+Port-forward the Radius dashboard:
+
+```bash
+kubectl port-forward --namespace=radius-system svc/dashboard 7007:80
+```
+Access the Application graph at [http://localhost:7007/resources/azure/Applications.Core/applications/order-console/application](http://localhost:7007/resources/azure/Applications.Core/applications/order-console/application)
+
+![alt text](image-1.png)
+
 ### 7. Clean up
 
 Delete the application:
