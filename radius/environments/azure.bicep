@@ -12,7 +12,6 @@ param location string = 'westus3'
 
 resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'azure'
-  location: 'global'
   properties: {
     compute: {
       kind: 'kubernetes'

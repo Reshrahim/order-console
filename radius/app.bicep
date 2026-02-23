@@ -15,6 +15,7 @@ param tag string = 'latest'
 
 resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: applicationName
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -38,6 +39,7 @@ resource pubsub 'Radius.Dapr/pubSubBrokers@2025-08-01-preview' = {
 
 resource orders_api 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'orders-api'
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -76,6 +78,7 @@ resource orders_api 'Applications.Core/containers@2023-10-01-preview' = {
 
 resource fulfillment_worker 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'fulfillment-worker'
+  
   properties: {
     application: app.id
     container: {
