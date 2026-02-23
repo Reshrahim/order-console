@@ -77,7 +77,7 @@ Recipes are Terraform configurations stored in a Git repository. When you regist
 
 ### 5a. Set up a Kubernetes Environment
 
-If you want to deploy the sample application to your Kubernetes cluster with in-cluster Dapr components, follow the steps below to set up the Kubernetes environment and register the Kubernetes Recipes. If you have configured the Azure provider and want to deploy to Azure, skip to the next section.
+If you want to deploy the sample application to your local Kubernetes cluster, follow the steps below to set up the Kubernetes environment and register the Kubernetes Recipes. If you have configured the Azure provider and want to deploy to Azure, skip to the next section.
 
 Create a resource group and deploy the Kubernetes environment:
 
