@@ -177,26 +177,55 @@ rad environment switch <environment-name>
 rad deploy radius/app.bicep
 ```
 
-[!NOTE] If you hit an error "terraform apply failure: exit status 1\n\nError: Plugin error\n\nThe plugin returned an unexpected error from\nplugin6.(*GRPCProvider).PlanResourceChange: rpc error: code = Unknown desc =\nfailed to determine resource type ID: failed to look up GVK\n[dapr.io/v1alpha1, Kind=Component] among available CRDs:\ncustomresourcedefinitions.apiextensions.k8s.io is forbidden: User\n\"system:serviceaccount:radius-system:dynamic-rp\" cannot list resource\n\"customresourcedefinitions\" in API group \"apiextensions.k8s.io\" at the\ncluster scope\n" make sure the service account `dynamic-rp` in the `radius-system` namespace has the necessary permissions to list CRDs and interacrt with dapr components. You can grant the permissions by creating a ClusterRoles and bind them to the service account with the following commands:
+If you hit an error like below on service account permissions when deploying the application, it means the service account `dynamic-rp` in the `radius-system` namespace does not have the necessary permissions to list CRDs and interact with Dapr components.
+
+```
+terraform apply failure: exit status 1\n\nError: Plugin error\n\nThe plugin returned an unexpected error from\nplugin6.(*GRPCProvider).PlanResourceChange: rpc error: code = Unknown desc =\nfailed to determine resource type ID: failed to look up GVK\n[dapr.io/v1alpha1, Kind=Component] among available CRDs:\ncustomresourcedefinitions.apiextensions.k8s.io is forbidden: User\n\"system:serviceaccount:radius-system:dynamic-rp\" cannot list resource\n\"customresourcedefinitions\" in API group \"apiextensions.k8s.io\" at the\ncluster scope\n" make sure the service account `dynamic-rp` in the `radius-system` namespace has the necessary permissions to list CRDs and interacrt with dapr components.
+```
+
+You can grant the permissions by creating a ClusterRoles and bind them to the service account with the following commands:
+
+      ```bash
+      # dapr.io permissions
+      kubectl create clusterrole radius-dapr-manager \
+        --verb=create,delete,get,list,patch,update,watch \
+        --resource=components.dapr.io,subscriptions.dapr.io,configurations.dapr.io,resiliencies.dapr.io
+
+      kubectl create clusterrolebinding radius-dapr-manager-binding \
+        --clusterrole=radius-dapr-manager \
+        --serviceaccount=radius-system:dynamic-rp
+
+      # apiextensions.k8s.io permissions
+      kubectl create clusterrole radius-crd-reader \
+        --verb=get,list,watch \
+        --resource=customresourcedefinitions.apiextensions.k8s.io
+
+      kubectl create clusterrolebinding radius-crd-reader-binding \
+        --clusterrole=radius-crd-reader \
+        --serviceaccount=radius-system:dynamic-rp
+      ```
+
+Deployment may take 15-20 minutes for Azure resources.
 
 ```bash
-# dapr.io permissions
-kubectl create clusterrole radius-dapr-manager \
-  --verb=create,delete,get,list,patch,update,watch \
-  --resource=components.dapr.io,subscriptions.dapr.io,configurations.dapr.io,resiliencies.dapr.io
+Deployment In Progress...
 
-kubectl create clusterrolebinding radius-dapr-manager-binding \
-  --clusterrole=radius-dapr-manager \
-  --serviceaccount=radius-system:dynamic-rp
+Completed            order-console   Applications.Core/applications
+Completed            statestore      Radius.Dapr/stateStores
+Completed            pubsub          Radius.Dapr/pubSubBrokers
+Completed            frontend-ui     Applications.Core/containers
+.                    fulfillment-worker Applications.Core/containers
+.                    orders-api      Applications.Core/containers
 
-# apiextensions.k8s.io permissions
-kubectl create clusterrole radius-crd-reader \
-  --verb=get,list,watch \
-  --resource=customresourcedefinitions.apiextensions.k8s.io
+Deployment Complete
 
-kubectl create clusterrolebinding radius-crd-reader-binding \
-  --clusterrole=radius-crd-reader \
-  --serviceaccount=radius-system:dynamic-rp
+Resources:
+    order-console   Applications.Core/applications
+    frontend-ui     Applications.Core/containers
+    fulfillment-worker Applications.Core/containers
+    orders-api      Applications.Core/containers
+    pubsub          Radius.Dapr/pubSubBrokers
+    statestore      Radius.Dapr/stateStores
 ```
 
 Access the application by port-forwarding:
