@@ -42,7 +42,7 @@ This sample showcases how to deploy a containerized microservices application th
 rad resource-type create -f radius/types.yaml
 ```
 
-### 2. Create Bicep extension
+### 2. Bicep extension
 
 The Bicep extension is already available in the `radius/extensions` folder as `radiusdapr.tgz`. If you make changes to the `types.yaml`, run the following command to create a new archive and update the extension in Radius:
 
