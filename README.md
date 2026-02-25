@@ -25,7 +25,7 @@ This sample showcases how to deploy a containerized microservices application th
 
 ### Application UI
 
-![alt text](image.png)
+![alt text](order-console.png)
 
 ## How to deploy the sample?
 
@@ -259,7 +259,7 @@ kubectl port-forward --namespace=radius-system svc/dashboard 7007:80
 ```
 Access the Application graph at [http://localhost:7007/resources/azure/Applications.Core/applications/order-console/application](http://localhost:7007/resources/azure/Applications.Core/applications/order-console/application)
 
-![alt text](image-1.png)
+![alt text](radius-dashboard.png)
 
 ### 7. Clean up
 
