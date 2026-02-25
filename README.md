@@ -82,7 +82,7 @@ This sample deploys containers onto a Kubernetes cluster. However, the Kafka que
 
 #### 4a. Kubernetes-only
 
-If you want to deploy the sample application to your local Kubernetes cluster, follow the steps below to set up the Kubernetes environment and register the Kubernetes Recipes. If you have configured the Azure provider and want to deploy to Azure, skip to the next section.
+If you want to deploy the sample application to your local Kubernetes cluster, follow the steps below to set up the Kubernetes environment and register the Kubernetes Recipes. If you have configured the Azure provider and want to deploy to Azure, skip to the section 4b.
 
 Create a resource group and deploy the Kubernetes environment:
 
@@ -96,7 +96,7 @@ rad deploy radius/environments/kubernetes.bicep --group local
 
 > [!NOTE]
 >
-> If you hit an error "No environment name or ID provided, pass in an environment name or ID" create an environment first with `rad environment create azure --group azure` and then run the deploy command again. This is a temporary workaround and should be fixed in v0.55.0 release.
+> If you hit an error "No environment name or ID provided, pass in an environment name or ID" create an environment first with `rad environment create local --group local` and then run the deploy command again. This is a temporary workaround and should be fixed in v0.55.0 release.
 
 This creates a `local` environment and registers the Kubernetes recipes.
 
