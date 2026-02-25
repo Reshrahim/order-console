@@ -267,5 +267,10 @@ Delete the application:
 
 ```bash
 rad app delete -a order-console
+```
+
+Delete the ClusterRoles and ClusterRoleBindings:
+
+```bash
 kubectl delete -f clusterrole-radius-dapr.yaml
 ```
