@@ -147,7 +147,7 @@ rad group create azure
 Create an Azure resource group for the Kafka queue and PostgreSQL database:
 
 ```bash
-az group create --name order-console2 --location <location>
+az group create --name order-console --location <location>
 ```
 
 Deploy the Azure environment, passing your Azure subscription and resource group:
